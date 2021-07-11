@@ -5,6 +5,7 @@ global OFFSET
 OFFSET = 0
 
 botToken = "1684884714:AAH2HqAyXE5iYVabQkDs2CwJJXTHco5QHYM"
+chatID = "-473189809"
 
 global requestURL
 global sendURL
@@ -46,15 +47,12 @@ def send_message(chatId, message):
     requests.post(sendURL + "?chat_id=" + str(chatId) + "&text=" + message)
 
 
-
-# this the old definition from the while loop
-#chatid = newmessage['message']['chat']['id']
-#
-chatID = "-473189809"
-
-# Trying to Send Simple Message "Hello World" with function "send_message"
 send_message(chatID,"Cyrix gay")
 
+# Create a Simple loop
+while True:
+    send_message(chatID,"Simple 5s loop")
+    sleep(5)
 
 # Leaving tihs for future reference
 #while True:
