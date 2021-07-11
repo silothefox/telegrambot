@@ -50,10 +50,10 @@ def send_message(chatId, message):
 # this the old definition from the while loop
 #chatid = newmessage['message']['chat']['id']
 #
-chatID = 473189809
+chatID = "-473189809"
 
 # Trying to Send Simple Message "Hello World" with function "send_message"
-send_message(chatID,"Hello World")
+send_message(chatID,"Cyrix gay")
 
 
 # Leaving tihs for future reference
