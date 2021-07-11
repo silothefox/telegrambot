@@ -15,34 +15,6 @@ sendURL = "http://api.telegram.org/bot" + botToken + "/sendMessage"
 print(requestURL)
 
 
-def update(url):
-    global OFFSET
-
-    try:
-        update_raw = requests.get(url + "?offset=" + str(OFFSET))
-        update = update_raw.json()
-        result = extract_result(update)
-
-        if result != False:
-            OFFSET = result['update_id'] + 1
-            return result
-        else:
-            return False
-
-    except requests.exceptions.ConnectionError:
-        pass
-
-
-def extract_result(dict):
-    result_array = dict['result']
-
-    if result_array == []:
-        return False
-    else:
-        result_dic = result_array[0]
-        return result_dic
-
-
 def send_message(chatId, message):
     requests.post(sendURL + "?chat_id=" + str(chatId) + "&text=" + message)
 
