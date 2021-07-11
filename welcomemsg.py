@@ -46,15 +46,26 @@ def send_message(chatId, message):
     requests.post(sendURL + "?chat_id=" + str(chatId) + "&text=" + message)
 
 
-while True:
-    newmessage = update(requestURL)
 
-    if newmessage != False:
-        chattype = newmessage['message']['chat']['type']
-        if chattype == "group":
-            if 'new_chat_participant' in newmessage['message']:
-                membername = newmessage['message']['new_chat_participant']['first_name']
-                chatid = newmessage['message']['chat']['id']
-                send_message(chatid, "Herzlich willkommen, " + membername + " !")
+# this the old definition from the while loop
+#chatid = newmessage['message']['chat']['id']
+#
+chatID = 473189809
 
-    sleep(1)
+# Trying to Send Simple Message "Hello World" with function "send_message"
+send_message(chatID,"Hello World")
+
+
+# Leaving tihs for future reference
+#while True:
+#    newmessage = update(requestURL)
+#
+#    if newmessage != False:
+#        chattype = newmessage['message']['chat']['type']
+#        if chattype == "group":
+#            if 'new_chat_participant' in newmessage['message']:
+#                membername = newmessage['message']['new_chat_participant']['first_name']
+#                chatid = newmessage['message']['chat']['id']
+#                send_message(chatid, "Herzlich willkommen, " + membername + " !")
+#
+#    sleep(1)
