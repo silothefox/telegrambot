@@ -6,6 +6,7 @@ OFFSET = 0
 
 botToken = "1684884714:AAH2HqAyXE5iYVabQkDs2CwJJXTHco5QHYM"
 chatID = "-473189809"
+Message_file = "Message.txt"
 
 global requestURL
 global sendURL
@@ -14,15 +15,21 @@ requestURL = "http://api.telegram.org/bot" + botToken + "/getUpdates"
 sendURL = "http://api.telegram.org/bot" + botToken + "/sendMessage"
 print(requestURL)
 
+def read_from_file(file):
+    from pathlib import Path
+    txt = Path(file).read_text()
+    return txt
+
+print(read_from_file(Message_file))
 
 def send_message(chatId, message):
     requests.post(sendURL + "?chat_id=" + str(chatId) + "&text=" + message)
 
 
-send_message(chatID,"Cyrix gay")
+send_message(chatID, read_from_file(Message_file))
 
-# Create a Simple loop
-while True:
+Create a Simple loop
+#while True:
     send_message(chatID,"Simple 5s loop")
     sleep(5)
 
