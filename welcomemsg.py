@@ -1,38 +1,42 @@
 import requests
 from time import sleep
 
-botToken = ""
-
 global requestURL
 global sendURL
-global OFFSET
+global botToken
+OFFSET = None
+
+from pathlib import Path
+botToken = Path("botToken.txt").read_text('utf-8')
 
 requestURL = "http://api.telegram.org/bot" + botToken + "/getUpdates"
 sendURL = "http://api.telegram.org/bot" + botToken + "/sendMessage"
 print(requestURL)
 
 def update(url):
-    OFFSET = None
+    global OFFSET
 
     try:
         update_raw = requests.get(url + "?offset=" + str(OFFSET))
-        print(update_raw)
+       # print(update_raw)
         update = update_raw.json()
         result = extract_result(update)
-        print(result)
+        #print("This is Result")
+        #print(result)
 
 
         if result != False:
             OFFSET = result['update_id'] + 1
-            print("this is OFFSET:")
-            print(OFFSET)
-            return result
+            #print("this is OFFSET:")
+            #print(OFFSET)
         else:
             return False
 
     except requests.exceptions.ConnectionError:
         print("This is an except")
         pass
+
+    return result
 
 
 def extract_result(dict):
@@ -42,8 +46,8 @@ def extract_result(dict):
         return False
     else:
         result_dic = result_array[0]
-        print("this is result_dic")
-        print(result_dic)
+        #print("this is result_dic")
+        #print(result_dic)
         return result_dic
 
 
@@ -53,7 +57,7 @@ def send_message(chatId, message):
 
 while True:
     newmessage = update(requestURL)
-    print("This is while:true")
+    #print("This is while:true")
 
     if newmessage != False:
         chattype = newmessage['message']['chat']['type']
